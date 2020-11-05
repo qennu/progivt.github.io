@@ -64,13 +64,13 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/progivt/ivt20/edit/master/',
+            'https://github.com/progivt/progivt.github.io/edit/main/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/progivt/ivt20/edit/master/blog/',
+            'https://github.com/progivt/progivt.github.io/edit/main/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
