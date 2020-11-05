@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[15],{74:function(o){o.exports=JSON.parse('{"allTagsPath":"/ivt20/blog/tags","slug":"covid","name":"covid","count":1,"permalink":"/ivt20/blog/tags/covid"}')}}]);

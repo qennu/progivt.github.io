@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[9],{68:function(o){o.exports=JSON.parse('{"allTagsPath":"/ivt20/blog/tags","slug":"coder","name":"coder","count":1,"permalink":"/ivt20/blog/tags/coder"}')}}]);
