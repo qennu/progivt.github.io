@@ -2,7 +2,7 @@ module.exports = {
   title: 'ProgIvt',
   tagline: 'Основы программирования ИВТ ИМИ',
   url: 'https://progivt.github.io',
-  baseUrl: '/',
+  baseUrl: 'ivt20/',
   onBrokenLinks: 'throw',
   favicon: 'img/progivt.png',
   organizationName: 'progivt', // Usually your GitHub org/user name.
@@ -70,7 +70,7 @@ module.exports = {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/progivt/ivt20/edit/master/website/blog/',
+            'https://github.com/progivt/ivt20/edit/master/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
