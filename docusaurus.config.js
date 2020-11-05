@@ -53,7 +53,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `© ${new Date().getFullYear()} А. Павлов и соавторы. Работает на Docusaurus.`,
+      copyright: `© ${new Date().getFullYear()} А. Павлов и соавторы. Работает на Docusaurus <img class="hitcount" src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits">`,
     },
   },
   presets: [
