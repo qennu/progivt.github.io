@@ -70,7 +70,7 @@ module.exports = {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/progivt/progivt.github.io/edit/main/blog/',
+            'https://github.com/progivt/progivt.github.io/edit/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
