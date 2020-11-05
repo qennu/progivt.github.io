@@ -2,11 +2,11 @@ module.exports = {
   title: 'ProgIvt',
   tagline: 'Основы программирования ИВТ ИМИ',
   url: 'https://progivt.github.io',
-  baseUrl: '/ivt20/',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   favicon: 'img/progivt.png',
   organizationName: 'progivt', // Usually your GitHub org/user name.
-  projectName: 'ivt20', // Usually your repo name.
+  projectName: 'progivt.github.io', // Usually your repo name.
   themeConfig: {
     navbar: {
       title: 'ProgIvt',
