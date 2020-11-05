@@ -26,7 +26,7 @@ module.exports = {
           label: 'Блог', 
           position: 'left'},
         {
-          href: 'https://github.com/progivt/ivt20',
+          href: 'https://github.com/progivt/progivt.github.io',
           label: 'Этот сайт@GitHub',
           position: 'right',
         },
