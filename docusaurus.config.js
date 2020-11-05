@@ -2,7 +2,7 @@ module.exports = {
   title: 'ProgIvt',
   tagline: 'Основы программирования ИВТ ИМИ',
   url: 'https://progivt.github.io',
-  baseUrl: 'ivt20/',
+  baseUrl: '/ivt20/',
   onBrokenLinks: 'throw',
   favicon: 'img/progivt.png',
   organizationName: 'progivt', // Usually your GitHub org/user name.
