@@ -98,6 +98,8 @@ function Home() {
   );
 }
 
+var displayDeadlineInterval = false;
+
 function displayDeadline() {
   let docTitle = document.getElementById("heroTitle");
 
@@ -108,9 +110,17 @@ function displayDeadline() {
 
     docTitle.textContent = "До конца лабы #3: " + timeToDeadline;
   }
- 
 }
 
-setInterval(displayDeadline, 1000);
+setInterval(function()
+{
+  if (displayDeadlineInterval) return false;
+
+  displayDeadlineInterval = true;
+
+  displayDeadline();
+
+  displayDeadlineInterval = false;
+}, 1000);
 
 export default Home;
