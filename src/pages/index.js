@@ -5,6 +5,10 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
+import moment from 'moment';
+
+moment().format();
+moment.locale('ru');
 
 const features = [
   {
@@ -63,7 +67,7 @@ function Home() {
       description="Курс «Основы программирования» для студентов ИВТ ИМИ СВФУ">
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
-          <h1 className="hero__title">{siteConfig.title}</h1>
+          <h1 className="hero__title" id="heroTitle">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
             <Link
@@ -94,14 +98,19 @@ function Home() {
   );
 }
 
-/*
 function displayDeadline() {
-  let deadline = moment("2020-11-11");
-  let timeToDeadline = moment(moment(deadline).diff(moment())).format('DD:HH:mm:ss');
+  let docTitle = document.getElementById("heroTitle");
 
-  document.getElementById("heroTitle").textContent = "До конца лабы: " + timeToDeadline;
+  if (docTitle) {
+
+    let deadline = moment("2020-11-11");
+    let timeToDeadline = moment(moment(deadline).diff(moment())).format('DD:HH:mm:ss');
+
+    docTitle.textContent = "До конца лабы #3: " + timeToDeadline;
+  }
+ 
 }
 
-setInterval(displayDeadline, 1000);*/
+setInterval(displayDeadline, 1000);
 
 export default Home;
