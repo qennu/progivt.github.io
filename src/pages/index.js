@@ -10,6 +10,8 @@ import moment from 'moment';
 moment().format();
 moment.locale('ru');
 
+var data = require('../../docs/lab.json'); // не придумал ничего лучше, потом допилю - ThePetrovich
+
 const features = [
   {
     title: 'Табличка',
@@ -68,7 +70,7 @@ function Home() {
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title" id="heroTitle">{siteConfig.title}</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <p className="hero__subtitle" id="heroSubtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
             <Link
               className={clsx(
@@ -102,13 +104,17 @@ var displayDeadlineInterval = false;
 
 function displayDeadline() {
   let docTitle = document.getElementById("heroTitle");
+  let docSubtitle = document.getElementById("heroSubtitle");
 
   if (docTitle) {
 
-    let deadline = moment("2020-11-11");
+    let deadline = moment(data.deadline);
     let timeToDeadline = moment(moment(deadline).diff(moment())).format('DD:HH:mm:ss');
 
-    docTitle.textContent = "До конца лабы #3: " + timeToDeadline;
+    let url = `<a style="color:#FFFFFF" href="${data.url}">${data.name}</a>`;
+
+    docTitle.textContent = "До конца лабы: " + timeToDeadline;
+    docSubtitle.innerHTML = url;
   }
 }
 
