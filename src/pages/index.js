@@ -94,4 +94,14 @@ function Home() {
   );
 }
 
+/*
+function displayDeadline() {
+  let deadline = moment("2020-11-11");
+  let timeToDeadline = moment(moment(deadline).diff(moment())).format('DD:HH:mm:ss');
+
+  document.getElementById("heroTitle").textContent = "До конца лабы: " + timeToDeadline;
+}
+
+setInterval(displayDeadline, 1000);*/
+
 export default Home;

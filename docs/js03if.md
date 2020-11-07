@@ -3,11 +3,15 @@ id: js03if
 title: ЛР3. Простые ветвления
 ---
 
+import WebComponent from '../src/WebComponent'
+
 Сдавать, как описано в [инструкции](labs.md).
 
 :::important
 Приглашение: https://git.io/JT5Gs <br/>
 Дедлайн: 11 ноя 2020 23:59
+
+<WebComponent />
 :::
 
 Нужно сдать четыре задачи, номера которых написаны в конце pdf-файла с условиями внутри репозитория. Находите свой номер в списке группы в [Табличке](https://docs.google.com/spreadsheets/d/13NEztGQWOVKS7TdsKctvaWNkH0_pQDyrPta67bUvOLE), в pdf-файле смотрите номера. Например, Тимофеев Илья в списке группы 28-й. Заглядываем в конец файла с условиями, видим
