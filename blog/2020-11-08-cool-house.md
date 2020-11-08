@@ -10,9 +10,11 @@ tags: [coder, khan]
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
 
-Всегда приятно, когда встречаешь задание, по которому видно, что человеку интересно. Лучший дом!
+Всегда приятно, когда встречаешь задание, по которому видно, что человеку интересно. Лучшие дома!
 
-export const Video = ({children, src}) => (<video autoplay='autoplay' loop='loop' preload='metadata'>{children}<source src={src} type='video/mp4'/>
+export const Video = ({children, src}) => (<video width='400' height='400' autoplay='autoplay' loop='loop' preload='metadata'>{children}<source src={src} type='video/mp4'/>
 </video> );
 
 <Video src={useBaseUrl('img/House.mp4')}></Video>
+
+<img alt="House 2" src={useBaseUrl('img/house-1.png')} />
