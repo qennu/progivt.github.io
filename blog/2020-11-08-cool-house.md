@@ -15,4 +15,4 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 export const Video = ({children, src}) => (<video autoplay='autoplay' loop='loop' preload='metadata'>{children}<source src={src} type='video/mp4'/>
 </video> );
 
-<Video src={useBaseUrl('../static/img/House.mp4')}></Video>
+<Video src={useBaseUrl('img/House.mp4')}></Video>
