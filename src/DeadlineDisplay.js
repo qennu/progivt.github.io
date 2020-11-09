@@ -1,7 +1,6 @@
 import React, {useRef, useEffect} from 'react';
 import moment from 'moment';
 import {getLabDeadline} from './LabController.js';
-//import data from '../docs/lab.json';
 
 class inlineDeadlineDisplay extends HTMLElement {
   constructor() {

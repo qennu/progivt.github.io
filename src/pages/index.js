@@ -10,7 +10,7 @@ import moment from 'moment';
 moment().format();
 moment.locale('ru');
 
-//import data from '../../docs/lab.json'; // не придумал ничего лучше, потом допилю - ThePetrovich
+import {getLabData} from '../LabController.js'; // не придумал ничего лучше, потом допилю - ThePetrovich
 
 const features = [
   {
@@ -107,14 +107,18 @@ function displayDeadline() {
   let docSubtitle = document.getElementById("heroSubtitle");
 
   if (docTitle) {
+    let data = getLabData();
+    
+    if (data) {
+      if (moment(data.deadline).diff(moment()) > 0) {
+        let timeToDeadline = moment(moment(data.deadline).diff(moment())).format('DD:HH:mm:ss');
 
-    //let deadline = moment(data.deadline);
-    //let timeToDeadline = moment(moment(deadline).diff(moment())).format('DD:HH:mm:ss');
+        let url = `<a style="color:#FFFFFF" href="${data.url}">${data.name}</a>`;
 
-    //let url = `<a style="color:#FFFFFF" href="${data.url}">${data.name}</a>`;
-
-  //  docTitle.textContent = "До конца лабы: " + timeToDeadline;
-  //  docSubtitle.innerHTML = url;
+        docTitle.innerHTML = url;
+        docSubtitle.textContent = "До конца лабы: " + timeToDeadline;
+      }
+    }
   }
 }
 
