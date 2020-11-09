@@ -15,14 +15,9 @@ class inlineDeadlineDisplay extends HTMLElement {
   }
 
   connectedCallback() {
-    console.log("Webcomponent connect, setting up");
-
     this.labPath = window.location.pathname;
     this.deadline = getLabDeadline(this.labPath);
 
-    console.log(this.labPath);
-    console.log(this.deadline);
-    
     this.update();
     if (!this.updateInterval) {
       this.updateInterval = setInterval(this.update.bind(this), 1000);
@@ -38,12 +33,9 @@ class inlineDeadlineDisplay extends HTMLElement {
     else {
       this.shadow.innerHTML = `<div>Время вышло, лаба окончена!</div>`;
     }
-
-    console.log("deadline update! ");
   }
 
   disconnectedCallback() {
-    console.log("Webcomponent disconnect, cleaning");
     clearInterval(this.updateInterval);
   }
 }
