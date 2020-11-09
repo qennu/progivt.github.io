@@ -5,9 +5,13 @@ title: ЛР2. Двигаем спрайт
 
 Сдавать, как описано в [инструкции](labs.md).
 
+import DeadlineDisplay from '../src/DeadlineDisplay'
+
 :::important
 Приглашение: https://git.io/JTtYO <br/>
 Дедлайн: 28 окт 2020 23:59
+
+<DeadlineDisplay />
 :::
 
 Мы напишем программу для движения персонажа на игровом поле,

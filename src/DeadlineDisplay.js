@@ -1,20 +1,51 @@
-import React, {useRef, useEffect} from 'react'
+import React, {useRef, useEffect} from 'react';
 import moment from 'moment';
-var data = require('../docs/lab.json');
+import {getLabDeadline} from './LabController.js';
+//import data from '../docs/lab.json';
 
 class inlineDeadlineDisplay extends HTMLElement {
   constructor() {
     super();
     this.shadow = this.attachShadow({mode: 'open'});
+
+    this.deadline = '';
     this.timeToDeadline = '';
+    this.labPath = '';
+
+    this.updateInterval = null;
+  }
+
+  connectedCallback() {
+    console.log("Webcomponent connect, setting up");
+
+    this.labPath = window.location.pathname;
+    this.deadline = getLabDeadline(this.labPath);
+
+    console.log(this.labPath);
+    console.log(this.deadline);
+    
     this.update();
-    setInterval(this.update.bind(this), 1000);
+    if (!this.updateInterval) {
+      this.updateInterval = setInterval(this.update.bind(this), 1000);
+    }
+
   }
 
   update() {
-    this.timeToDeadline = moment(moment(data.deadline).diff(moment())).format('DD:HH:mm:ss');
+    if (this.deadline != '') {
+      this.timeToDeadline = moment(moment(this.deadline).diff(moment())).format('DD:HH:mm:ss');
+      this.shadow.innerHTML = `<div>До сдачи лабы: ${this.timeToDeadline}</div>`;
+    }
+    else {
+      this.shadow.innerHTML = `<div>Время вышло, лаба окончена!</div>`;
+    }
 
-    this.shadow.innerHTML = `<div>До сдачи лабы: ${this.timeToDeadline}</div>`;
+    console.log("deadline update! ");
+  }
+
+  disconnectedCallback() {
+    console.log("Webcomponent disconnect, cleaning");
+    clearInterval(this.updateInterval);
   }
 }
 
