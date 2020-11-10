@@ -5,6 +5,12 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
+import moment from 'moment';
+
+moment().format();
+moment.locale('ru');
+
+import {getLabData} from '../LabController.js'; // не придумал ничего лучше, потом допилю - ThePetrovich
 
 const features = [
   {
@@ -63,8 +69,8 @@ function Home() {
       description="Курс «Основы программирования» для студентов ИВТ ИМИ СВФУ">
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
-          <h1 className="hero__title">{siteConfig.title}</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <h1 className="hero__title" id="heroTitle">{siteConfig.title}</h1>
+          <p className="hero__subtitle" id="heroSubtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
             <Link
               className={clsx(
@@ -93,5 +99,38 @@ function Home() {
     </Layout>
   );
 }
+
+var displayDeadlineInterval = false;
+
+function displayDeadline() {
+  let docTitle = document.getElementById("heroTitle");
+  let docSubtitle = document.getElementById("heroSubtitle");
+
+  if (docTitle) {
+    let data = getLabData();
+    
+    if (data) {
+      if (moment(data.deadline).diff(moment()) > 0) {
+        let timeToDeadline = moment(moment(data.deadline).diff(moment())).format('DD:HH:mm:ss');
+
+        let url = `<a style="color:#FFFFFF" href="${data.url}">${data.name}</a>`;
+
+        docTitle.innerHTML = url;
+        docSubtitle.textContent = "До конца лабы: " + timeToDeadline;
+      }
+    }
+  }
+}
+
+setInterval(function()
+{
+  if (displayDeadlineInterval) return false;
+
+  displayDeadlineInterval = true;
+
+  displayDeadline();
+
+  displayDeadlineInterval = false;
+}, 1000);
 
 export default Home;
