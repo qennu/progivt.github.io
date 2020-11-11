@@ -60,9 +60,38 @@ function Feature({imageUrl, title, description, link}) {
   );
 }
 
+var displayDeadlineInterval = false;
+
 function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
+  setInterval(function()
+  {
+    if (displayDeadlineInterval) return false;
+  
+    displayDeadlineInterval = true;
+  
+    if (typeof(document) != 'undefined') {
+      let docTitle = document.getElementById("heroTitle");
+      let docSubtitle = document.getElementById("heroSubtitle");
+    
+      if (docTitle) {
+        let data = getLabData();
+        
+        if (data) {
+          if (moment(data.deadline).diff(moment()) > 0) {
+            let timeToDeadline = moment(moment(data.deadline).diff(moment())).format('DD:HH:mm:ss');
+    
+            let url = `<a style="color:#FFFFFF" href="${data.url}">${data.name}</a>`;
+    
+            docTitle.innerHTML = url;
+            docSubtitle.textContent = "До конца лабы: " + timeToDeadline;
+          }
+        }
+      } 
+    }
+    displayDeadlineInterval = false;
+  }, 1000);
   return (
     <Layout
       title={`${siteConfig.title}: Добро пожаловать `}
@@ -99,38 +128,5 @@ function Home() {
     </Layout>
   );
 }
-
-var displayDeadlineInterval = false;
-
-function displayDeadline() {
-  let docTitle = document.getElementById("heroTitle");
-  let docSubtitle = document.getElementById("heroSubtitle");
-
-  if (docTitle) {
-    let data = getLabData();
-    
-    if (data) {
-      if (moment(data.deadline).diff(moment()) > 0) {
-        let timeToDeadline = moment(moment(data.deadline).diff(moment())).format('DD:HH:mm:ss');
-
-        let url = `<a style="color:#FFFFFF" href="${data.url}">${data.name}</a>`;
-
-        docTitle.innerHTML = url;
-        docSubtitle.textContent = "До конца лабы: " + timeToDeadline;
-      }
-    }
-  }
-}
-
-setInterval(function()
-{
-  if (displayDeadlineInterval) return false;
-
-  displayDeadlineInterval = true;
-
-  displayDeadline();
-
-  displayDeadlineInterval = false;
-}, 1000);
 
 export default Home;
