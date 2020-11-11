@@ -1,6 +1,6 @@
 import React, {useRef, useEffect} from 'react';
-import moment from 'moment';
-import {getLabDeadline} from './LabController.js';
+import moment from 'moment-timezone';
+import {getLabDeadline, dateFormat} from './LabController.js';
 import NoSSR from '@mpth/react-no-ssr';
 
 const isServer = () => typeof window === 'undefined';
@@ -33,8 +33,10 @@ export default class DeadlineDisplay extends React.Component {
 
   update() {
     if (this.deadline != '') {
-      this.timeToDeadline = moment(moment(this.deadline).diff(moment())).format('DD:HH:mm:ss');
-      this.htmlText = 'До сдачи лабы: ' + this.timeToDeadline;
+      let deadlineM = moment.tz(this.deadline, "Asia/Yakutsk");
+      let timeNow = moment().tz("Asia/Yakutsk");
+
+      this.htmlText = 'До сдачи лабы: ' + String(deadlineM.diff(timeNow, 'days')) + ' дн. ' + String(moment(deadlineM.diff(timeNow)).format('HH:mm:ss'));
     }
     else {
       this.htmlText = 'Время вышло, лаба окончена!';

@@ -5,7 +5,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 moment().format();
 moment.locale('ru');
@@ -80,12 +80,13 @@ function Home() {
         
         if (data) {
           if (moment(data.deadline).diff(moment()) > 0) {
-            let timeToDeadline = moment(moment(data.deadline).diff(moment())).format('DD:HH:mm:ss');
-    
+            let deadlineM = moment.tz(data.deadline, "Asia/Yakutsk");
+            let timeNow = moment().tz("Asia/Yakutsk");
+
             let url = `<a style="color:#FFFFFF" href="${data.url}">${data.name}</a>`;
     
             docTitle.innerHTML = url;
-            docSubtitle.textContent = "До конца лабы: " + timeToDeadline;
+            docSubtitle.textContent = "До конца лабы: " + String(deadlineM.diff(timeNow, 'days')) + ' дн. ' + String(moment(deadlineM.diff(timeNow)).format('HH:mm:ss'));
           }
         }
       } 
