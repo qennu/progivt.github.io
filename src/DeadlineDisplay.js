@@ -1,42 +1,31 @@
-import React, {useRef, useEffect} from 'react';
+import React from 'react';
 import moment from 'moment-timezone';
-import {getLabDeadline, dateFormat} from './LabController.js';
-import NoSSR from '@mpth/react-no-ssr';
-
-const isServer = () => typeof window === 'undefined';
+import {getLabDeadline} from './LabController.js';
 
 export default class DeadlineDisplay extends React.Component {
   constructor() {
     super();
 
     this.deadline = '';
-    this.timeToDeadline = '';
-    this.labPath = '';
     this.htmlText = 'Время вышло, лаба окончена!';
+    this.deadlineM = 0;
 
     this.updateInterval = null;
   }
 
   componentDidMount() {
-    this.labPath = window.location.pathname;
-    this.deadline = getLabDeadline(this.labPath);
-
-    console.log(this.deadline);
-    console.log(this.labPath);
-
     this.update();
     if (!this.updateInterval) {
       this.updateInterval = setInterval(this.update.bind(this), 1000);
     }
-
   }
 
   update() {
-    if (this.deadline != '') {
-      let deadlineM = moment.tz(this.deadline, "Asia/Yakutsk");
-      let timeNow = moment().tz("Asia/Yakutsk");
+    this.deadline = getLabDeadline(window.location.pathname);
 
-      this.htmlText = 'До сдачи лабы: ' + String(deadlineM.diff(timeNow, 'days')) + ' дн. ' + String(moment(deadlineM.diff(timeNow)).format('HH:mm:ss'));
+    if (this.deadline != '') {
+      this.deadlineM = moment.tz(this.deadline, "Asia/Yakutsk");
+      this.htmlText = 'До сдачи лабы: ' + this.deadlineM.diff(moment(), 'days') + ' дн. ' + moment.utc(this.deadlineM.diff(moment())).format('HH:mm:ss');
     }
     else {
       this.htmlText = 'Время вышло, лаба окончена!';

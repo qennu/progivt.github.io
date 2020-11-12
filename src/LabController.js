@@ -9,7 +9,7 @@ import moment from 'moment-timezone';
 
 export function getLabDeadline(labPath) {
     if (labPath === activeLab.path || labPath === 'main') {  
-        if (moment.tz(activeLab.deadline, "Asia/Yakutsk").diff(moment().tz("Asia/Yakutsk")) > 0) {
+        if (moment.tz(activeLab.deadline, "Asia/Yakutsk").diff(moment.tz("Asia/Yakutsk")) > 0) {
             return activeLab.deadline;
         }
     }

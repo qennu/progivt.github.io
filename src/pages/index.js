@@ -7,7 +7,6 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 import moment from 'moment-timezone';
 
-moment().format();
 moment.locale('ru');
 
 import {getLabData} from '../LabController.js'; // не придумал ничего лучше, потом допилю - ThePetrovich
@@ -84,15 +83,16 @@ function Home() {
             let timeNow = moment().tz("Asia/Yakutsk");
 
             let url = `<a style="color:#FFFFFF" href="${data.url}">${data.name}</a>`;
-    
+
             docTitle.innerHTML = url;
-            docSubtitle.textContent = "До конца лабы: " + String(deadlineM.diff(timeNow, 'days')) + ' дн. ' + String(moment(deadlineM.diff(timeNow)).format('HH:mm:ss'));
+            docSubtitle.textContent = "До конца лабы: " + deadlineM.diff(timeNow, 'days') + ' дн. ' + moment.utc(deadlineM.diff(timeNow)).format('HH:mm:ss');
           }
         }
       } 
     }
     displayDeadlineInterval = false;
   }, 1000);
+
   return (
     <Layout
       title={`${siteConfig.title}: Добро пожаловать `}
