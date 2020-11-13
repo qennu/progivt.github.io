@@ -1,8 +1,8 @@
 var activeLab = {
-    "name": "ЛР3. Простые ветвления",
-    "deadline": "2020-11-11 23:59",
-    "url": "https://git.io/JT5Gs",
-    "path": "/docs/js03if"
+    "name": "ЛР4. Циклы",
+    "deadline": "2020-11-18 23:59",
+    "url": "https://progivt.github.io/docs/js04loop",
+    "path": "/docs/js04loop"
 }; // можно допилить и стягивать с стороннего серва - ThePetrovich
 
 import moment from 'moment-timezone';
