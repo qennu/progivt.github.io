@@ -14,14 +14,11 @@
     "@docusaurus/core": "2.0.0-alpha.66",
     "@docusaurus/preset-classic": "2.0.0-alpha.66",
     "@mdx-js/react": "^1.5.8",
-    "@mpth/react-no-ssr": "^1.0.1",
-    "@skatejs/ssr": "^0.19.11",
     "clsx": "^1.1.1",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.31",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "skatejs": "^5.2.4"
+    "react-dom": "^16.8.4"
   },
   "browserslist": {
     "production": [
