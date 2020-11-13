@@ -1,62 +1,43 @@
-import React, {useRef, useEffect} from 'react';
-import moment from 'moment';
+import React from 'react';
+import moment from 'moment-timezone';
 import {getLabDeadline} from './LabController.js';
 
-class inlineDeadlineDisplay extends HTMLElement {
+export default class DeadlineDisplay extends React.Component {
   constructor() {
     super();
-    this.shadow = this.attachShadow({mode: 'open'});
 
     this.deadline = '';
-    this.timeToDeadline = '';
-    this.labPath = '';
+    this.htmlText = 'Время вышло, лаба окончена!';
+    this.deadlineM = 0;
 
     this.updateInterval = null;
   }
 
-  connectedCallback() {
-    this.labPath = window.location.pathname;
-    this.deadline = getLabDeadline(this.labPath);
-
+  componentDidMount() {
     this.update();
     if (!this.updateInterval) {
       this.updateInterval = setInterval(this.update.bind(this), 1000);
     }
-
   }
 
   update() {
+    this.deadline = getLabDeadline(window.location.pathname);
+
     if (this.deadline != '') {
-      this.timeToDeadline = moment(moment(this.deadline).diff(moment())).format('DD:HH:mm:ss');
-      this.shadow.innerHTML = `<div>До сдачи лабы: ${this.timeToDeadline}</div>`;
+      this.deadlineM = moment.tz(this.deadline, "Asia/Yakutsk");
+      this.htmlText = 'До сдачи лабы: ' + this.deadlineM.diff(moment(), 'days') + ' дн. ' + moment.utc(this.deadlineM.diff(moment())).format('HH:mm:ss');
     }
     else {
-      this.shadow.innerHTML = `<div>Время вышло, лаба окончена!</div>`;
+      this.htmlText = 'Время вышло, лаба окончена!';
     }
+    this.forceUpdate();
   }
 
-  disconnectedCallback() {
+  render() {
+    return <div>{this.htmlText}</div>;
+  }
+
+  componentWillUnmount() {
     clearInterval(this.updateInterval);
   }
-}
-
-export const RenderDisplay = () => {
-  useEffect(() => {
-    if (!window.customElements.get('inline-display')) {
-        window.customElements.define('inline-display', inlineDeadlineDisplay)
-    }
-  }, [])
-
-  const displayElement = useRef(null)
-  return (
-    <div>
-      <inline-display ref={displayElement}></inline-display>
-    </div>
-  )
-}
-
-export default () => (
-  <>
-    <RenderDisplay />
-  </>
-)
+} 

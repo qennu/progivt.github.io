@@ -3,7 +3,7 @@ id: js03if
 title: ЛР3. Простые ветвления
 ---
 
-import DeadlineDisplay from '../src/DeadlineDisplay'
+import DeadlineDisplay from '../src/DeadlineDisplay.js'
 
 Сдавать, как описано в [инструкции](labs.md).
 

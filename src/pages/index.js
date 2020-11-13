@@ -5,9 +5,8 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
-moment().format();
 moment.locale('ru');
 
 import {getLabData} from '../LabController.js'; // не придумал ничего лучше, потом допилю - ThePetrovich
@@ -60,9 +59,40 @@ function Feature({imageUrl, title, description, link}) {
   );
 }
 
+var displayDeadlineInterval = false;
+
 function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
+  setInterval(function()
+  {
+    if (displayDeadlineInterval) return false;
+  
+    displayDeadlineInterval = true;
+  
+    if (typeof(document) != 'undefined') {
+      let docTitle = document.getElementById("heroTitle");
+      let docSubtitle = document.getElementById("heroSubtitle");
+    
+      if (docTitle) {
+        let data = getLabData();
+        
+        if (data) {
+          if (moment(data.deadline).diff(moment()) > 0) {
+            let deadlineM = moment.tz(data.deadline, "Asia/Yakutsk");
+            let timeNow = moment().tz("Asia/Yakutsk");
+
+            let url = `<a style="color:#FFFFFF" href="${data.url}">${data.name}</a>`;
+
+            docTitle.innerHTML = url;
+            docSubtitle.textContent = "До конца лабы: " + deadlineM.diff(timeNow, 'days') + ' дн. ' + moment.utc(deadlineM.diff(timeNow)).format('HH:mm:ss');
+          }
+        }
+      } 
+    }
+    displayDeadlineInterval = false;
+  }, 1000);
+
   return (
     <Layout
       title={`${siteConfig.title}: Добро пожаловать `}
@@ -99,38 +129,5 @@ function Home() {
     </Layout>
   );
 }
-
-var displayDeadlineInterval = false;
-
-function displayDeadline() {
-  let docTitle = document.getElementById("heroTitle");
-  let docSubtitle = document.getElementById("heroSubtitle");
-
-  if (docTitle) {
-    let data = getLabData();
-    
-    if (data) {
-      if (moment(data.deadline).diff(moment()) > 0) {
-        let timeToDeadline = moment(moment(data.deadline).diff(moment())).format('DD:HH:mm:ss');
-
-        let url = `<a style="color:#FFFFFF" href="${data.url}">${data.name}</a>`;
-
-        docTitle.innerHTML = url;
-        docSubtitle.textContent = "До конца лабы: " + timeToDeadline;
-      }
-    }
-  }
-}
-
-setInterval(function()
-{
-  if (displayDeadlineInterval) return false;
-
-  displayDeadlineInterval = true;
-
-  displayDeadline();
-
-  displayDeadlineInterval = false;
-}, 1000);
 
 export default Home;
