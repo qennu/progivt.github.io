@@ -8,7 +8,7 @@ import DeadlineDisplay from '../src/DeadlineDisplay.js'
 Сдавать, как описано в [инструкции](labs.md).
 
 :::important
-Приглашение: будет позже <br/>
+Приглашение: https://git.io/JkWqP <br/>
 Дедлайн: 18 ноя 2020 23:59
 
 <DeadlineDisplay />
